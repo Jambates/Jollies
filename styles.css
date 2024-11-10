@@ -1,0 +1,202 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden;
+  font-size: 16px;
+}
+
+/* Header and Navigation */
+header {
+  background: linear-gradient(90deg, #ff5e62, #ff9966);
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+header .logo h1 {
+  font-size: 2rem;
+  color: #fff;
+}
+
+header ul {
+  list-style: none;
+  display: flex;
+}
+
+header ul li {
+  margin: 0 20px;
+}
+
+header ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+header ul li a:hover {
+  color: #fffae5;
+}
+
+/* Hero Section */
+#home {
+  background: linear-gradient(135deg, #ff5e62, #ff9966);
+  color: #fff;
+  text-align: center;
+  padding: 100px 20px;
+  background-size: cover;
+  background-position: center;
+}
+
+#home h1 {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#home p {
+  font-size: 1.4rem;
+  margin-bottom: 40px;
+}
+
+#home .btn {
+  background: #fff;
+  color: #ff5e62;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+#home .btn:hover {
+  background: #ff9966;
+  color: #fff;
+}
+
+/* About Section */
+#about {
+  padding: 80px 20px;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+#about h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+#about p {
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
+  color: #666;
+}
+
+/* Gallery Section */
+#gallery {
+  padding: 80px 20px;
+  background: #f9f9f9;
+}
+
+#gallery h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.profile-card {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.profile-card p {
+  padding: 20px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.profile-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+}
+
+/* Contact Section */
+#contact {
+  padding: 80px 20px;
+  background: #333;
+  color: #fff;
+  text-align: center;
+}
+
+#contact h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+#contact form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#contact input, #contact textarea {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  background: #444;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+#contact input:focus, #contact textarea:focus {
+  background: #555;
+}
+
+#contact button {
+  background: #ff5e62;
+  color: #fff;
