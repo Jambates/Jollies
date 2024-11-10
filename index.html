@@ -1,147 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flare - Welcome</title>
-  <style>
-    /* Basic CSS styling */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f9;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      text-align: center;
-    }
-    h1 {
-      color: #333;
-    }
-    .message-box {
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      margin-top: 30px;
-      width: 80%;
-      max-width: 600px;
-    }
-    .button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-      margin-top: 20px;
-    }
-    .button:hover {
-      background-color: #45a049;
-    }
-    .data-list {
-      list-style-type: none;
-      padding: 0;
-    }
-    .data-list li {
-      margin: 10px 0;
-      background-color: #eef;
-      padding: 10px;
-      border-radius: 5px;
-    }
-    .login-form {
-      margin-top: 30px;
-    }
-    .login-input {
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      margin: 5px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flare App</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Linking the CSS file -->
 </head>
 <body>
+    <header>
+        <h1>Welcome to Flare!</h1>
+        <p>Check out the amazing API!</p>
+    </header>
 
-  <h1>Welcome to Flare!</h1>
+    <main>
+        <section id="api-message">
+            <h2>API Response</h2>
+            <p id="api-response">Loading...</p>
+        </section>
+    </main>
 
-  <!-- Message Box (Displays the "Welcome to Flare" message from the backend) -->
-  <div class="message-box" id="welcome-message">
-    <p>Loading...</p>
-  </div>
+    <footer>
+        <p>&copy; 2024 Flare. All rights reserved.</p>
+    </footer>
 
-  <!-- Button to Fetch Data from /data route -->
-  <button class="button" id="fetch-data-button">Fetch Data</button>
-
-  <!-- Data Display Section (For listing data fetched from the backend) -->
-  <ul class="data-list" id="data-list"></ul>
-
-  <!-- Login Form (For testing login and getting JWT token) -->
-  <div class="login-form">
-    <input type="text" id="username" class="login-input" placeholder="Username" />
-    <input type="password" id="password" class="login-input" placeholder="Password" />
-    <button class="button" id="login-button">Login</button>
-    <p id="login-message"></p>
-  </div>
-
-  <script>
-    // Fetch and display the welcome message from the backend
-    fetch('http://localhost:3000')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('welcome-message').innerHTML = `<p>${data}</p>`;
-      })
-      .catch(error => {
-        console.error('Error fetching the welcome message:', error);
-        document.getElementById('welcome-message').innerHTML = '<p>Error loading message.</p>';
-      });
-
-    // Fetch data from the /data route on the server and display it
-    document.getElementById('fetch-data-button').addEventListener('click', () => {
-      fetch('http://localhost:3000/data')
-        .then(response => response.json())
-        .then(data => {
-          const dataList = document.getElementById('data-list');
-          dataList.innerHTML = ''; // Clear previous data
-          data.data.forEach(item => {
-            const li = document.createElement('li');
-            li.textContent = `${item.name}: ${item.description}`;
-            dataList.appendChild(li);
-          });
-        })
-        .catch(error => {
-          console.error('Error fetching data:', error);
-        });
-    });
-
-    // Handle login form submission
-    document.getElementById('login-button').addEventListener('click', () => {
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-
-      fetch('http://localhost:3000/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.token) {
-          document.getElementById('login-message').textContent = 'Login successful! Token: ' + data.token;
-        } else {
-          document.getElementById('login-message').textContent = 'Invalid credentials.';
-        }
-      })
-      .catch(error => {
-        console.error('Error during login:', error);
-        document.getElementById('login-message').textContent = 'Error during login.';
-      });
-    });
-  </script>
-  
+    <script>
+        // Fetching data from the /api route
+        fetch('/api')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('api-response').textContent = data.message;
+            })
+            .catch(err => {
+                document.getElementById('api-response').textContent = 'Error fetching data';
+            });
+    </script>
 </body>
 </html>
