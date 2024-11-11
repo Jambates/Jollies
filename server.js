@@ -1,47 +1,76 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const path = require('path');
-require('dotenv').config();
-
+const mongoose = require('mongoose');
+const cors = require('cors');
 const app = express();
-const port = process.env.PORT || 3000;
-
-// MongoDB connection
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-.then(() => console.log('Connected to MongoDB'))
-.catch(err => console.error('MongoDB connection error:', err));
+const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public'))); // Serve static files from the "public" folder
+app.use(express.json()); // For parsing application/json
+app.use(express.static(path.join(__dirname, 'public'))); // Serve static files (e.g. index.html, styles.css)
+app.use(cors()); // Enable Cross-Origin Resource Sharing
 
-// Routes
-// Serve index.html on the root route
+// MongoDB Atlas Connection
+const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://Jamiebates2023:Hunny234@flare.azj5m.mongodb.net/myDatabaseName?retryWrites=true&w=majority&appName=Flare';
+
+// Replace `<your_username>`, `<your_password>`, and `<your_db_name>` with your MongoDB Atlas details
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => {
+    console.log('MongoDB connected');
+  })
+  .catch((err) => {
+    console.error('MongoDB connection error:', err);
+  });
+
+// Example of a MongoDB Schema and Model
+const ExampleSchema = new mongoose.Schema({
+  name: String,
+  message: String,
+});
+
+const ExampleModel = mongoose.model('Example', ExampleSchema);
+
+// API Routes
+app.get('/api/hello', (req, res) => {
+  res.json({ message: 'Hello from the API!' });
+});
+
+// Route to retrieve data from MongoDB
+app.get('/api/data', async (req, res) => {
+  try {
+    const data = await ExampleModel.find();
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to retrieve data' });
+  }
+});
+
+// Route to add data to MongoDB
+app.post('/api/data', async (req, res) => {
+  const { name, message } = req.body;
+  try {
+    const newData = new ExampleModel({ name, message });
+    await newData.save();
+    res.status(201).json(newData);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to save data' });
+  }
+});
+
+// Serve the static homepage (index.html)
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Sample API route
-app.get('/api/message', (req, res) => {
-    res.json({ message: 'Hello from the API!' });
-});
-
-// 404 handler for any other routes
-app.use((req, res) => {
-    res.status(404).send('404: Page Not Found');
-});
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something went wrong!');
+// Catch-all route for SPAs (single-page apps) to handle frontend routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Start the server
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
-
