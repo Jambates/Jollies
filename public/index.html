@@ -1,197 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Flare - Landing Page</title>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
-    <!-- Main CSS -->
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f1f1f1;
-            color: #333;
-        }
-
-        header {
-            background-color: #ff4c68;
-            padding: 40px 0;
-            text-align: center;
-            color: #fff;
-        }
-
-        header h1 {
-            font-size: 3rem;
-            margin: 0;
-            letter-spacing: 1px;
-        }
-
-        header p {
-            font-size: 1.2rem;
-            margin-top: 10px;
-            font-weight: 300;
-        }
-
-        /* Main section styles */
-        .content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 20px;
-            text-align: center;
-        }
-
-        .content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            font-weight: 500;
-        }
-
-        .content p {
-            font-size: 1rem;
-            margin-bottom: 50px;
-            color: #666;
-        }
-
-        /* Form styling */
-        #data-form {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            display: inline-block;
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        #data-form input {
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            font-size: 1rem;
-            color: #333;
-        }
-
-        #data-form button {
-            width: 100%;
-            padding: 15px;
-            background-color: #ff4c68;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-
-        #data-form button:hover {
-            background-color: #e0435e;
-        }
-
-        /* Data container */
-        #data-container {
-            margin-top: 50px;
-            text-align: center;
-        }
-
-        .data-item {
-            background-color: #fff;
-            margin: 15px 0;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-        }
-
-        .data-item h3 {
-            font-size: 1.5rem;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .data-item p {
-            font-size: 1.1rem;
-            color: #555;
-        }
-
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 20px 0;
-            font-size: 0.9rem;
-        }
-
-        footer a {
-            color: #ff4c68;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Media Queries for responsiveness */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.5rem;
-            }
-
-            header p {
-                font-size: 1rem;
-            }
-
-            .content h2 {
-                font-size: 2rem;
-            }
-
-            .content p {
-                font-size: 0.9rem;
-            }
-
-            #data-form {
-                width: 90%;
-                padding: 25px;
-            }
-
-            #data-form input,
-            #data-form button {
-                font-size: 1rem;
-            }
-        }
-    </style>
+    <title>Find Your Perfect Match</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">
+            <a href="/">MatchUp</a>
+        </div>
+        <div class="menu-icon" onclick="toggleMenu()">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <ul id="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/signup.html">Sign Up</a></li>
+            <li><a href="/login.html">Login</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
     <header>
-        <h1>Welcome to Flare!</h1>
-        <p>Your go-to place to find love and build meaningful connections.</p>
+        <div class="hero-container">
+            <img src="https://images.pexels.com/photos/3775333/pexels-photo-3775333.jpeg?auto=compress&cs=tinysrgb&h=1000&w=940"
+                alt="Couple Together" class="hero-image">
+            <div class="hero-text">
+                <h1>Find Your Perfect Match</h1>
+                <p>Join thousands of happy couples. Start your journey today!</p>
+                <a href="/signup.html" class="cta-button">Get Started</a>
+            </div>
+        </div>
     </header>
 
-    <div class="content">
-        <h2>Join the conversation!</h2>
-        <p>Sign up below to start sharing your messages and meet others in the Flare community.</p>
+    <!-- Features Section -->
+    <section class="features">
+        <div class="feature">
+            <img src="https://images.pexels.com/photos/3775334/pexels-photo-3775334.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+                alt="Create Your Profile" class="feature-img">
+            <h2>Create Your Profile</h2>
+            <p>Build a profile that reflects who you are and what you're looking for.</p>
+        </div>
+        <div class="feature">
+            <img src="https://images.pexels.com/photos/3775336/pexels-photo-3775336.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+                alt="Connect & Chat" class="feature-img">
+            <h2>Connect & Chat</h2>
+            <p>Start meaningful conversations with people who match your interests.</p>
+        </div>
+        <div class="feature">
+            <img src="https://images.pexels.com/photos/3775337/pexels-photo-3775337.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+                alt="Find Your Match" class="feature-img">
+            <h2>Smart Matching</h2>
+            <p>Our matching algorithm connects you with the right people based on your preferences.</p>
+        </div>
+    </section>
 
-        <!-- Form to Add New Data -->
-        <form id="data-form">
-            <input type="text" id="name" placeholder="Enter your name" required>
-            <input type="text" id="message" placeholder="Enter your message" required>
-            <button type="submit">Add Message</button>
-        </form>
+    <!-- Call to Action -->
+    <section class="cta">
+        <h2>Ready to Find Love?</h2>
+        <a href="/signup.html" class="cta-button">Sign Up Now</a>
+    </section>
 
-        <!-- Container to Display Data -->
-        <div id="data-container"></div>
-    </div>
-
+    <!-- Footer Section -->
     <footer>
-        <p>&copy; 2024 Flare. All rights reserved. <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        <div class="footer-content">
+            <ul class="footer-links">
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+                <li><a href="/terms.html">Terms & Conditions</a></li>
+                <li><a href="/privacy.html">Privacy Policy</a></li>
+            </ul>
+            <p>&copy; 2024 MatchUp. All rights reserved.</p>
+        </div>
     </footer>
 
-    <script src="app.js"></script>
+    <script>
+        // Toggle the dropdown menu on mobile
+        function toggleMenu() {
+            const menu = document.getElementById("nav-links");
+            menu.classList.toggle("active");
+        }
+    </script>
 </body>
+
 </html>
