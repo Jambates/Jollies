@@ -5,6 +5,9 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+
+require('dotenv').config();  // Add this at the top of your server.js
+
 // Middleware
 app.use(express.json()); // For parsing application/json
 app.use(express.static(path.join(__dirname, 'public'))); // Serve static files (e.g. index.html, styles.css)
@@ -64,6 +67,15 @@ app.post('/api/data', async (req, res) => {
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+
+
+app.use(express.static('public'));  // Ensure public directory exists
+
+// Example route to serve index.html
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 
 // Catch-all route for SPAs (single-page apps) to handle frontend routing
 app.get('*', (req, res) => {
