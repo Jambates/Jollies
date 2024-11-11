@@ -5,8 +5,7 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-
-require('dotenv').config();  // Add this at the top of your server.js
+require('dotenv').config(); // Add this to load environment variables
 
 // Middleware
 app.use(express.json()); // For parsing application/json
@@ -14,9 +13,8 @@ app.use(express.static(path.join(__dirname, 'public'))); // Serve static files (
 app.use(cors()); // Enable Cross-Origin Resource Sharing
 
 // MongoDB Atlas Connection
-const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://Jamiebates2023:Hunny234@flare.azj5m.mongodb.net/myDatabaseName?retryWrites=true&w=majority&appName=Flare';
+const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://Jamiebates2023:Hunny234@flare.azj5m.mongodb.net/Flare?retryWrites=true&w=majority';
 
-// Replace `<your_username>`, `<your_password>`, and `<your_db_name>` with your MongoDB Atlas details
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -37,6 +35,7 @@ const ExampleSchema = new mongoose.Schema({
 const ExampleModel = mongoose.model('Example', ExampleSchema);
 
 // API Routes
+// Example hello API
 app.get('/api/hello', (req, res) => {
   res.json({ message: 'Hello from the API!' });
 });
@@ -67,15 +66,6 @@ app.post('/api/data', async (req, res) => {
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
-
-
-app.use(express.static('public'));  // Ensure public directory exists
-
-// Example route to serve index.html
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
 
 // Catch-all route for SPAs (single-page apps) to handle frontend routing
 app.get('*', (req, res) => {

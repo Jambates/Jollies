@@ -3,36 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flare App</title>
-    <link rel="stylesheet" href="/styles.css"> <!-- Linking the CSS file -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Flare - Landing Page</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f1f1;
+            color: #333;
+        }
+
+        header {
+            background-color: #ff4c68;
+            padding: 40px 0;
+            text-align: center;
+            color: #fff;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            font-weight: 300;
+        }
+
+        /* Main section styles */
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .content p {
+            font-size: 1rem;
+            margin-bottom: 50px;
+            color: #666;
+        }
+
+        /* Form styling */
+        #data-form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #data-form input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        #data-form button {
+            width: 100%;
+            padding: 15px;
+            background-color: #ff4c68;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        #data-form button:hover {
+            background-color: #e0435e;
+        }
+
+        /* Data container */
+        #data-container {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .data-item {
+            background-color: #fff;
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .data-item h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .data-item p {
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #ff4c68;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Media Queries for responsiveness */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            .content h2 {
+                font-size: 2rem;
+            }
+
+            .content p {
+                font-size: 0.9rem;
+            }
+
+            #data-form {
+                width: 90%;
+                padding: 25px;
+            }
+
+            #data-form input,
+            #data-form button {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1>Welcome to Flare!</h1>
-        <p>Check out the amazing API!</p>
+        <p>Your go-to place to find love and build meaningful connections.</p>
     </header>
 
-    <main>
-        <section id="api-message">
-            <h2>API Response</h2>
-            <p id="api-response">Loading...</p>
-        </section>
-    </main>
+    <div class="content">
+        <h2>Join the conversation!</h2>
+        <p>Sign up below to start sharing your messages and meet others in the Flare community.</p>
+
+        <!-- Form to Add New Data -->
+        <form id="data-form">
+            <input type="text" id="name" placeholder="Enter your name" required>
+            <input type="text" id="message" placeholder="Enter your message" required>
+            <button type="submit">Add Message</button>
+        </form>
+
+        <!-- Container to Display Data -->
+        <div id="data-container"></div>
+    </div>
 
     <footer>
-        <p>&copy; 2024 Flare. All rights reserved.</p>
+        <p>&copy; 2024 Flare. All rights reserved. <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
     </footer>
 
-    <script>
-        // Fetching data from the /api route
-        fetch('/api')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('api-response').textContent = data.message;
-            })
-            .catch(err => {
-                document.getElementById('api-response').textContent = 'Error fetching data';
-            });
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
