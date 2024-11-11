@@ -1,45 +1,47 @@
 const express = require('express');
-const path = require('path');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const cors = require('cors');
+const path = require('path');
+require('dotenv').config();
 
-// Load environment variables from .env file
-dotenv.config();
-
-// Initialize express app
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Middleware setup
-app.use(cors()); // Enable CORS if needed
-app.use(express.json()); // Middleware to parse JSON requests
+// MongoDB connection
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+.then(() => console.log('Connected to MongoDB'))
+.catch(err => console.error('MongoDB connection error:', err));
 
-// Static file serving (for index.html and styles.css)
-app.use(express.static(path.join(__dirname, 'public')));
+// Middleware
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public'))); // Serve static files from the "public" folder
 
-// Example API route
-app.get('/api', (req, res) => {
-    res.json({ message: "Hello from API!" });
+// Routes
+// Serve index.html on the root route
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// API route for getting user info (can be expanded for more routes)
-app.get('/api/user', (req, res) => {
-    // This is a simple example. You can replace it with actual data fetching logic.
-    res.json({ username: "user1", email: "user@example.com" });
+// Sample API route
+app.get('/api/message', (req, res) => {
+    res.json({ message: 'Hello from the API!' });
 });
 
-// Catch-all route to serve index.html for all other requests
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// 404 handler for any other routes
+app.use((req, res) => {
+    res.status(404).send('404: Page Not Found');
 });
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Connected to MongoDB'))
-    .catch(err => console.log('MongoDB connection error:', err));
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something went wrong!');
+});
 
-// Start server
+// Start the server
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+    console.log(`Server is running on port ${port}`);
 });
+
